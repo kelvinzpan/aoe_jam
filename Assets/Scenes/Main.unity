@@ -200,7 +200,7 @@ MonoBehaviour:
   CongestionWindow: 1
   SendWindowSize: 128
   ReceiveWindowSize: 128
-  debugGUI: 0
+  debugGUI: 1
 --- !u!114 &25379685
 MonoBehaviour:
   m_ObjectHideFlags: 0
