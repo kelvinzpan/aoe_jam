@@ -41,8 +41,8 @@ public class Player : MonoBehaviour
         distToGround = col.bounds.extents.y;
     }
 
-    // Update is called once per frame
-    void Update()
+    // FixedUpdate isn't frame dependent
+    void FixedUpdate()
     {
         jumpTimer = Mathf.Max(0f, jumpTimer - Time.deltaTime);
 
@@ -81,14 +81,14 @@ public class Player : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
         Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        rb.AddForce(moveDir.normalized * moveSpeed * Time.deltaTime);
+        rb.AddForce(moveDir.normalized * moveSpeed);
     }
 
     bool isGrounded()
     {
         if (Physics.Raycast(transform.position, -Vector3.up, out rcHitGround, 50f))
         {
-            return rcHitGround.distance < (distToGround + 0.1f);
+            return rcHitGround.distance < (distToGround + 0.2f);
         }
 
         return false;
