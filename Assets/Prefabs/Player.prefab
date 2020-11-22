@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 8701200538870549115}
   - component: {fileID: 4994094150908114849}
   - component: {fileID: -7761528896936702960}
+  - component: {fileID: 2001281333876494126}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -118,6 +119,7 @@ Transform:
   m_Children:
   - {fileID: 8446815437318636498}
   - {fileID: 181704218}
+  - {fileID: 4240628244567392308}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -274,6 +276,20 @@ MonoBehaviour:
   TurnSmoothTime: 0.1
   JumpSpeed: 200
   childModel: {fileID: 181704217}
+--- !u!114 &2001281333876494126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683240700860256173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e3aebdc6542114fb77f2811066e93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Spawnpoint: {fileID: 4240628244567392308}
+  Prefab: {fileID: 1646361297582344093, guid: 4ab21b687385dbf41833b069f1924c54, type: 3}
 --- !u!1 &6200867609121668476
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,3 +371,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8942418142176127074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4240628244567392308}
+  m_Layer: 0
+  m_Name: Spawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4240628244567392308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8942418142176127074}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.76, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2481061551328164995}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
