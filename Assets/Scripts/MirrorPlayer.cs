@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class Player : MonoBehaviour
+public class MirrorPlayer : Mirror.NetworkBehaviour
 {
     public float MoveSpeed;
     public float GroundSpeedLimit;
@@ -33,12 +33,15 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Set up third person camera
-        playerCam = Camera.main;
-        cmFreeLook.Follow = this.transform;
-        cmFreeLook.LookAt = this.transform;
+        if (isLocalPlayer)
+        {
+            // Set up third person camera
+            playerCam = Camera.main;
+            cmFreeLook.Follow = this.transform;
+            cmFreeLook.LookAt = this.transform;
 
-        distToGround = col.bounds.extents.y;
+            distToGround = col.bounds.extents.y;
+        }
     }
 
     // Update is called once per frame
