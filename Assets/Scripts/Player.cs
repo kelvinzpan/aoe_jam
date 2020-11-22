@@ -51,12 +51,17 @@ public class Player : Mirror.NetworkBehaviour
 
         if (isGrounded())
         {
+            //childModel.transform.rotation = Quaternion.FromToRotation(Vector3.up, rcHitGround.normal);
+
             // WASD
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
             Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-            turnTowards(direction);
+            if (isMoving(direction))
+            {
+                moveTowards(direction);
+            }
 
             // Space to jump
             if (Input.GetKey(KeyCode.Space) && jumpTimer <= 0f)
@@ -65,25 +70,21 @@ public class Player : Mirror.NetworkBehaviour
                 rb.AddForce(moveDir.normalized * JumpSpeed);
                 jumpTimer = 0.1f;
             }
-
-            childModel.transform.rotation = Quaternion.FromToRotation(Vector3.up, rcHitGround.normal);
         }
     }
 
     // Explained in Brackeys: https://www.youtube.com/watch?v=4HpC--2iowE
     // which moves on a 2D plane and uses kinematics instead of rigidbody.
     // Can be changed, this just simulates Super Monkey Ball.
-    void turnTowards(Vector3 direction)
+    void moveTowards(Vector3 direction)
     {
-        if (direction.magnitude >= 0.1f && rb.velocity.magnitude < GroundSpeedLimit)
-        {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCam.transform.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, TurnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        float moveSpeed = rb.velocity.magnitude < GroundSpeedLimit ? MoveSpeed : 0f;
+        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCam.transform.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, TurnSmoothTime);
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            rb.AddForce(moveDir.normalized * MoveSpeed * Time.deltaTime);
-        }
+        Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        rb.AddForce(moveDir.normalized * moveSpeed * Time.deltaTime);
     }
 
     bool isGrounded()
@@ -94,5 +95,10 @@ public class Player : Mirror.NetworkBehaviour
         }
 
         return false;
+    }
+
+    bool isMoving(Vector3 direction)
+    {
+        return direction.magnitude >= 0.1f;
     }
 }
